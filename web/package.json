@@ -1,0 +1,31 @@
+{
+  "name": "rsbuild-react-ts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rsbuild build",
+    "dev": "rsbuild dev --open",
+    "format": "prettier --write .",
+    "preview": "rsbuild preview"
+  },
+  "dependencies": {
+    "@arco-design/web-react": "^2.65.0",
+    "@rsbuild/plugin-basic-ssl": "^1.1.1",
+    "@visactor/vchart": "^1.13.8",
+    "axios": "^1.8.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.4.1"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^1.2.16",
+    "@rsbuild/plugin-react": "^1.1.1",
+    "@rsbuild/plugin-svgr": "^1.0.7",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "prettier": "^3.5.2",
+    "sass": "^1.86.0",
+    "typescript": "^5.8.2"
+  }
+}
