@@ -1,1 +1,3 @@
-package core
+package rbac
+
+func init() {}

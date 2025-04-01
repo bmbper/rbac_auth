@@ -1,11 +1,21 @@
 package core
 
 import (
-	organ "api/core/rbac/organ"
-	"api/db"
+	"api/core/rbac"
+	"log/slog"
+
+	"github.com/gin-gonic/gin"
 )
 
 func init() {
-	println("init core")
-	db.DbUtil.Table("bmbp_rbac_organ").AutoMigrate(&organ.BmbpRbacOrgan{})
+	slog.Info("初始化核心模块....")
+}
+
+func AddRoutes(r *gin.Engine) {
+	slog.Info("注册核心路由....")
+	r.GET("/", func(ctx *gin.Context) {
+		ctx.String(200, "Hello, World!")
+	})
+	rbac.AddRoutes(r)
+
 }
