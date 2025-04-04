@@ -8,7 +8,7 @@ import (
 
 func AddRoutes(r *gin.RouterGroup) {
 	slog.Info("注册核心-rbac-组织模块路由")
-	organ := r.Group("/organ")
+	organ := r.Group("/v1/organ")
 	{
 		organ.POST("/tree", OrganTree)
 		organ.POST("/page", OrganPage)

@@ -4,29 +4,22 @@ import (
 	"api/base"
 )
 
-type Organ struct {
+type BmbpRbacOrgan struct {
 	base.BaseBean
-	OrganCode       string    `json:"orgCode"`           // 组织编码
-	OrganName       string    `json:"orgName"`           // 组织名称
-	OrganType       OrganType `json:"organType"`         // 组织类型
-	OrganCodePath   string    `json:"organCodePath"`     // 组织编码路径
-	OrganNamePath   string    `json:"organNamePath"`     // 组织名称路径
-	OrganParentCode string    `json:"organParentCode"`   // 上级组织编码
-	OrganGrade      int       `json:"organGrade"`        // 组织层级
-	OrganChildren   []Organ   `json:"children" gorm:"-"` // 下级组织
+	base.BaseTree
 }
 
-func (o *Organ) GetCode() string {
-	return o.OrganCode
+func (o BmbpRbacOrgan) GetCode() string {
+	return o.NodeCode
 }
-func (o *Organ) GetParentCode() string {
-	return o.OrganParentCode
+func (o BmbpRbacOrgan) GetParentCode() string {
+	return o.NodeParentCode
 }
-func (o *Organ) GetChildren() []Organ {
-	return o.OrganChildren
+func (o BmbpRbacOrgan) GetChildren() []base.TreeNode {
+	return o.NodeChildren
 }
-func (o *Organ) SetChildren(children []Organ) {
-	o.OrganChildren = children
+func (o BmbpRbacOrgan) SetChildren(children []base.TreeNode) {
+	o.NodeChildren = children
 }
 
 type OrganType int
@@ -40,27 +33,27 @@ const (
 	OrganTypePerson                          // 人员
 )
 
-type OrganArea struct {
+type BmbpRbacOrganArea struct {
 	base.BaseBean
-	OrganCode string `json:"orgCode"` // 组织编码
+	NodeCode string `json:"nodeCode" gorm:"not null;type:string;size:36;comment:组织编码"` // 组织编码
 }
-type OrganGroup struct {
+type BmbpRbacOrganGroup struct {
 	base.BaseBean
-	OrganCode string `json:"orgCode"` // 组织编码
+	NodeCode string `json:"nodeCode" gorm:"not null;type:string;size:36;comment:组织编码"` // 组织编码
 }
-type OrganUnit struct {
+type BmbpRbacOrganUnit struct {
 	base.BaseBean
-	OrganCode string `json:"orgCode"` // 组织编码
+	NodeCode string `json:"nodeCode" gorm:"not null;type:string;size:36;comment:组织编码"` // 组织编码
 }
-type OrganDepartment struct {
+type BmbpRbacOrganDept struct {
 	base.BaseBean
-	OrganCode string `json:"orgCode"` // 组织编码
+	NodeCode string `json:"nodeCode" gorm:"not null;type:string;size:36;comment:组织编码"` // 组织编码
 }
-type OrganPosition struct {
+type BmbpRbacOrganPost struct {
 	base.BaseBean
-	OrganCode string `json:"orgCode"` // 组织编码
+	NodeCode string `json:"nodeCode" gorm:"not null;type:string;size:36;comment:组织编码"` // 组织编码
 }
-type OrganPerson struct {
+type BmbpRbacOrganPerson struct {
 	base.BaseBean
-	OrganCode string `json:"orgCode"` // 组织编码
+	NodeCode string `json:"nodeCode" gorm:"not null;type:string;size:36;comment:组织编码"` // 组织编码
 }
