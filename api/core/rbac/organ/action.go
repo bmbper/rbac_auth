@@ -1,8 +1,8 @@
 package organ
 
 import (
-	"api/base"
-	"api/db"
+	"bmbp/base"
+	"bmbp/db"
 	"errors"
 	"log/slog"
 	"strings"
@@ -245,7 +245,36 @@ func OrganDisable(ctx *gin.Context) {
 	ctx.JSON(200, base.Resp{Code: "0", Msg: "success", Data: nil})
 }
 func OrganEnable(ctx *gin.Context) {
-	ctx.JSON(200, base.Resp{Code: "0", Msg: "success", Data: nil})
+	dataId := ctx.Query("dataId")
+	if dataId == "" {
+		ctx.JSON(200, base.RespFail("组织机构ID不能为空"))
+		return
+	}
+
+	// 检查当前状态
+	var organ BmbpRbacOrgan
+	if err := db.DbUtil.Model(&BmbpRbacOrgan{}).
+		Where("data_id = ?", dataId).
+		First(&organ).Error; err != nil {
+		ctx.JSON(200, base.RespFail("组织机构不存在"))
+		return
+	}
+
+	// 如果已经是启用状态则直接返回
+	if organ.DataStatus == "1" {
+		ctx.JSON(200, base.RespOkWithMsg(nil, "组织机构已处于启用状态"))
+		return
+	}
+
+	// 执行启用操作
+	if err := db.DbUtil.Model(&BmbpRbacOrgan{}).
+		Where("data_id = ?", dataId).
+		Update("data_status", "1").Error; err != nil {
+		ctx.JSON(200, base.RespFail("启用失败: "+err.Error()))
+		return
+	}
+
+	ctx.JSON(200, base.RespOkWithMsg(nil, "启用成功"))
 }
 
 func OrganSaveParent(ctx *gin.Context) {

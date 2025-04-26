@@ -1,7 +1,7 @@
 package organ
 
 import (
-	"api/base"
+	"bmbp/base"
 )
 
 type BmbpRbacOrgan struct {

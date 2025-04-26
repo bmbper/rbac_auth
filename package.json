@@ -1,6 +1,0 @@
-{
-  "dependencies": {},
-  "devDependencies": {
-    "@rsbuild/plugin-sass": "^1.3.1"
-  }
-}
